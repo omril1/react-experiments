@@ -1,0 +1,115 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:latest", "tslint-mobx", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    // ignores generated code
+    "exclude": []
+  },
+  "jsRules": {
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "no-console": false,
+    "no-invalid-template-strings": false,
+    "variable-name": {
+      "options": ["allow-pascal-case", "allow-leading-underscore", "ban-keywords"]
+    }
+  },
+  "rules": {
+    // Might change latter
+    "curly": false,
+    "comment-format": false,
+    "no-duplicate-imports": false,
+    /* Mobx rules */
+    "mobx-react-no-unused-inject": true,
+    "mobx-react-no-empty-inject": true,
+    "mobx-react-no-inject-decorators": false,
+    "mobx-react-no-async-action": true,
+
+    "array-type": false,
+    "interface-name": false,
+    "jsx-boolean-value": false,
+    "member-access": false,
+    "member-ordering": false,
+    "no-bitwise": false,
+    "no-console": false,
+    "no-empty": false,
+    "no-invalid-template-strings": false,
+    "no-namespace": false,
+    "no-submodule-imports": false,
+    "object-literal-sort-keys": false,
+    "triple-equals": false,
+
+    /* Formatting rules */
+    
+    "encoding": true,
+    "eofline": true,
+    "import-spacing": true,
+    "indent": { "options": "spaces" },
+    "linebreak-style": { "options":"LF", "severity": "warning" },
+    "no-consecutive-blank-lines": true,
+    "no-trailing-whitespace": true,
+
+    /*  */
+
+    "adjacent-overload-signatures": true,
+    "align": true,
+    "arrow-return-shorthand": true,
+    "ban": true,
+    "ban-comma-operator": true,
+    "binary-expression-operand-order": true,
+    "callable-types": true,
+    "class-name": true,
+    "match-default-export-name": true,
+    "new-parens": true,
+    "no-angle-bracket-type-assertion": true,
+    "no-arg": true,
+    "no-conditional-assignment": true,
+    "no-construct": true,
+    "no-duplicate-switch-case": true,
+    "no-eval": true,
+    "no-reference": true,
+    "no-string-throw": true,
+    "no-this-assignment": { "options": { "allow-destructuring": true }},
+    "no-unnecessary-class": true,
+    "no-unnecessary-initializer": true,
+    "no-unnecessary-qualifier": true,
+    "no-unnecessary-type-assertion": true,
+    "no-unsafe-finally": true,
+    "no-unused-expression": true,
+    "no-unused-variable": true,
+    "prefer-conditional-expression": true,
+    "prefer-for-of": true,
+    "prefer-object-spread": true,
+    "prefer-template": { "options": "allow-single-concat" },
+    "return-undefined": true,
+    "switch-final-break": true,
+    "unified-signatures": true,
+    "use-isnan": true,
+    
+    "no-redundant-jsdoc": true,
+    "deprecation": true,
+    "cyclomatic-complexity": { "options": 12, "severity": "warning" },
+    "max-file-line-count": { "options": 300, "severity": "warning" },
+    "prefer-function-over-method": { "options": ["allow-public", "allow-protected"] },
+    
+    "object-literal-shorthand": {
+      "severity": "warning"
+    },
+    "prefer-const": {
+      "severity": "warning"
+    },
+    "variable-name": {
+      "options": ["allow-leading-underscore", "allow-pascal-case", "ban-keywords"],
+      "severity": "warning"
+    },
+    "no-implicit-dependencies": false,
+    "ordered-imports": {
+      "options": {
+        "import-sources-order": "any",
+        "named-imports-order": "any"
+      },
+      "severity": "warning"
+    }
+  },
+ "rulesDirectory": []
+}

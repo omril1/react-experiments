@@ -1,0 +1,16 @@
+.vscode
+.DS_STORE
+node_modules
+.module-cache
+*.log*
+build
+dist
+.awcache
+
+#VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/snippets.code-snippets
