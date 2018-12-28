@@ -1,4 +1,5 @@
 import * as React from 'react';
+import NeonHex from './Routes/NeonHex';
 import ParticleSwirl from './Routes/ParticleSwirl';
 import Welcome from 'app/Routes/Welcome';
 import { History } from 'history';
@@ -11,6 +12,7 @@ export const App = hot(module)(({ history }: { history: History }) => (
     <Switch>
       <Route path="/" exact component={Welcome} />
       <Route path="/ParticleSwirl" component={ParticleSwirl} />
+      <Route path="/NeonHex" component={NeonHex} />
     </Switch>
   </Router>
 ));
