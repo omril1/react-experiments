@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ParticleSwirl from './Routes/ParticleSwirl';
 import Welcome from 'app/Routes/Welcome';
 import { History } from 'history';
 import { hot } from 'react-hot-loader';
@@ -9,6 +10,7 @@ export const App = hot(module)(({ history }: { history: History }) => (
   <Router history={history}>
     <Switch>
       <Route path="/" exact component={Welcome} />
+      <Route path="/ParticleSwirl" component={ParticleSwirl} />
     </Switch>
   </Router>
 ));
