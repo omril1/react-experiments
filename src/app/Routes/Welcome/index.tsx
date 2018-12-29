@@ -19,6 +19,9 @@ export default function Welcome() {
         <li>
           <a href="/DonutSwirl">DonutSwirl</a>
         </li>
+        <li>
+          <a href="/RotatingParticleMesh">RotatingParticleMesh</a>
+        </li>
       </ul>
     </div>
   );

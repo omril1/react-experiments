@@ -78,6 +78,7 @@
     "bootstrap-css-only": "^3.3.7",
     "classnames": "^2.2.6",
     "core-js": "^2.5.7",
+    "dat.gui": "^0.7.3",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "mobx": "4.5",
