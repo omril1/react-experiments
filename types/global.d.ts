@@ -26,6 +26,11 @@ declare module '*.jpg' {
   export = svg;
 }
 
+declare module '*.png' {
+  const png: string;
+  export = png;
+}
+
 declare type CSSProperties = React.CSSProperties;
 declare type Omit<T, K extends keyof T> = T extends any ? Pick<T, Exclude<keyof T, K>> : never;
 declare type Overwrite<T, U> = Omit<T, keyof T & keyof U> & U;
