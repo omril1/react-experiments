@@ -14,6 +14,7 @@ const Welcome = Loadable(() => import('app/Routes/Welcome'));
 const WebGLWater = Loadable(() => import('app/Routes/WebGLWater'));
 const DonutSwirl = Loadable(() => import('app/Routes/DonutSwirl'));
 const RotatingParticleMesh = Loadable(() => import('app/Routes/RotatingParticleMesh'));
+const WebGLFluid = Loadable(() => import('app/Routes/WebGLFluid'));
 
 // render react DOM
 export const App = hot(module)(({ history }: { history: History }) => (
@@ -25,6 +26,7 @@ export const App = hot(module)(({ history }: { history: History }) => (
       <Route path="/WebGLWater" component={WebGLWater} />
       <Route path="/DonutSwirl" component={DonutSwirl} />
       <Route path="/RotatingParticleMesh" component={RotatingParticleMesh} />
+      <Route path="/WebGLFluid" component={WebGLFluid} />
     </Switch>
   </Router>
 ));

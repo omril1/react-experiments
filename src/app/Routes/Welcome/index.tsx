@@ -22,6 +22,9 @@ export default function Welcome() {
         <li>
           <a href="/RotatingParticleMesh">RotatingParticleMesh</a>
         </li>
+        <li>
+          <a href="/WebGLFluid">WebGLFluid</a>
+        </li>
       </ul>
     </div>
   );
