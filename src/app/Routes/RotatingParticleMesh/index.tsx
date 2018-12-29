@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import * as dat from 'dat.gui';
 import Controls from './Controls';
 
-//Forked from https://codepen.io/enesser/pen/jdenE
+// Forked from https://codepen.io/enesser/pen/jdenE
 
 const STEP_SIZE = 0.01;
 
