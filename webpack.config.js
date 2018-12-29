@@ -40,7 +40,7 @@ const config = {
         test: /\.tsx?$/,
         use: isProduction
           ? 'ts-loader'
-          : ['babel-loader?plugins[]=react-hot-loader/babel', 'ts-loader']
+          : [/* 'babel-loader?plugins[]=react-hot-loader/babel',  */'ts-loader']
       },
       // css
       {
