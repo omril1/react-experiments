@@ -11,6 +11,7 @@ const Loadable = (loader: () => Promise<{ default: React.ComponentType<any> }>) 
 const NeonHex = Loadable(() => import('./Routes/NeonHex'));
 const ParticleSwirl = Loadable(() => import('./Routes/ParticleSwirl'));
 const Welcome = Loadable(() => import('app/Routes/Welcome'));
+const WebGLWater = Loadable(() => import('app/Routes/WebGLWater'));
 
 // render react DOM
 export const App = hot(module)(({ history }: { history: History }) => (
@@ -19,6 +20,7 @@ export const App = hot(module)(({ history }: { history: History }) => (
       <Route path="/" exact component={Welcome} />
       <Route path="/ParticleSwirl" component={ParticleSwirl} />
       <Route path="/NeonHex" component={NeonHex} />
+      <Route path="/WebGLWater" component={WebGLWater} />
     </Switch>
   </Router>
 ));
