@@ -25,6 +25,9 @@ export default function Welcome() {
         <li>
           <a href="/WebGLFluid">WebGLFluid</a>
         </li>
+        <li>
+          <a href="/Shaders">Shaders</a>
+        </li>
       </ul>
     </div>
   );
