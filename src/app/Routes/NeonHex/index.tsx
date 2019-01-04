@@ -36,7 +36,12 @@ const unit_x = 3 * HEX_CRAD + HEX_GAP * sqrt(3);
 const unit_y = HEX_CRAD * sqrt(3) * 0.5 + 0.5 * HEX_GAP;
 const off_x = 1.5 * HEX_CRAD + HEX_GAP * sqrt(3) * 0.5;
 
-export default class NeonHex extends React.Component {
+interface Props {
+  style?: CSSProperties;
+  className?: string;
+}
+
+export default class NeonHex extends React.Component<Props> {
   // tslint:disable-next-line:no-shadowed-variable
   private wp = NEON_PALETE.map(c => {
     const num = parseInt(c.replace('#', ''), 16);
@@ -156,7 +161,9 @@ export default class NeonHex extends React.Component {
     };
 
     return (
-      <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+      <div
+        className={this.props.className}
+        style={{ position: 'relative', width: '100vw', height: '100vh', ...this.props.style }}>
         <canvas style={canvasStyle} />
         <canvas style={canvasStyle} />
       </div>

@@ -31,6 +31,9 @@ export default function Welcome() {
         <li>
           <a href="/RippleMousePlasma">RippleMousePlasma</a>
         </li>
+        <li>
+          <a href="/Combined">Combined</a>
+        </li>
       </ul>
     </div>
   );

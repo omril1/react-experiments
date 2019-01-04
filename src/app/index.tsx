@@ -17,6 +17,7 @@ const RotatingParticleMesh = Loadable(() => import('app/Routes/RotatingParticleM
 const WebGLFluid = Loadable(() => import('app/Routes/WebGLFluid'));
 const Shaders = Loadable(() => import('app/Routes/Shaders'));
 const RippleMousePlasma = Loadable(() => import('app/Routes/RippleMousePlasma'));
+const Combined = Loadable(() => import('app/Routes/Combined'));
 
 // render react DOM
 export const App = hot(module)(({ history }: { history: History }) => (
@@ -31,6 +32,7 @@ export const App = hot(module)(({ history }: { history: History }) => (
       <Route path="/WebGLFluid" component={WebGLFluid} />
       <Route path="/Shaders" component={Shaders} />
       <Route path="/RippleMousePlasma" component={RippleMousePlasma} />
+      <Route path="/Combined" component={Combined} />
     </Switch>
   </Router>
 ));
