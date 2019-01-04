@@ -28,6 +28,9 @@ export default function Welcome() {
         <li>
           <a href="/Shaders">Shaders</a>
         </li>
+        <li>
+          <a href="/RippleMousePlasma">RippleMousePlasma</a>
+        </li>
       </ul>
     </div>
   );

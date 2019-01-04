@@ -16,6 +16,7 @@ const DonutSwirl = Loadable(() => import('app/Routes/DonutSwirl'));
 const RotatingParticleMesh = Loadable(() => import('app/Routes/RotatingParticleMesh'));
 const WebGLFluid = Loadable(() => import('app/Routes/WebGLFluid'));
 const Shaders = Loadable(() => import('app/Routes/Shaders'));
+const RippleMousePlasma = Loadable(() => import('app/Routes/RippleMousePlasma'));
 
 // render react DOM
 export const App = hot(module)(({ history }: { history: History }) => (
@@ -29,6 +30,7 @@ export const App = hot(module)(({ history }: { history: History }) => (
       <Route path="/RotatingParticleMesh" component={RotatingParticleMesh} />
       <Route path="/WebGLFluid" component={WebGLFluid} />
       <Route path="/Shaders" component={Shaders} />
+      <Route path="/RippleMousePlasma" component={RippleMousePlasma} />
     </Switch>
   </Router>
 ));
