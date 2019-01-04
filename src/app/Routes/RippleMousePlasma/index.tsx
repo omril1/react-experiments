@@ -13,7 +13,12 @@ interface Uniforms {
   [uniform: string]: THREE.IUniform & { type: string };
 }
 
-export default class RippleMousePlasma extends React.Component {
+interface Props {
+  style?: CSSProperties;
+  className?: string;
+}
+
+export default class RippleMousePlasma extends React.Component<Props> {
   private canvas!: HTMLCanvasElement;
   private setCanvasRef = (canvas: HTMLCanvasElement) => (this.canvas = canvas);
 
@@ -193,6 +198,6 @@ export default class RippleMousePlasma extends React.Component {
   }
 
   render() {
-    return <canvas ref={this.setCanvasRef} />;
+    return <canvas className={this.props.className} style={this.props.style} ref={this.setCanvasRef} />;
   }
 }
