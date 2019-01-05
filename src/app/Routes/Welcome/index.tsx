@@ -34,6 +34,9 @@ export default function Welcome() {
         <li>
           <a href="/Combined">Combined</a>
         </li>
+        <li>
+          <a href="/CirclesPattern">CirclesPattern</a>
+        </li>
       </ul>
     </div>
   );
