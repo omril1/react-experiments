@@ -1,8 +1,47 @@
 .Welcome {
   min-height: 100vh;
+  max-height: 100vh;
   background-color: #ffe6a0d4;
   
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  overflow: overlay;
+}
+
+.grid { 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  align-items: stretch;
+  justify-items: center;
+  margin-bottom: 30px;
+}
+
+.gridItem {
+  width: 15em;
+  min-height: 8em;
+  max-width: 100%;
+
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  box-shadow: 2px 2px 6px 0 rgba(0,0,0,0.3);
+
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+
+  > img {
+    max-width: 100%;
+  }
+
+  > span {
+    width: 100%;
+    flex-grow: 1;
+    text-align: center;
+    background-color: #FFCA28;
+  }
 }
