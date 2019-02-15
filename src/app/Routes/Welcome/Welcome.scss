@@ -33,6 +33,12 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  transform: translate(0, 0);
+  transition: 0.1s transform ease-in-out;
+
+  &:hover {
+    transform: scale(1.15);
+  }
 
   > img {
     max-width: 100%;
