@@ -20,17 +20,15 @@ export default class DonutSwirl extends React.Component {
   private setCanvasRef = (canvas: HTMLCanvasElement) => (this.canvas = canvas);
   private scene = new THREE.Scene();
   private camera!: THREE.PerspectiveCamera;
-  private SPEED!: number;
+  private SPEED = 0.01;
   private renderer!: THREE.WebGLRenderer;
-  private mesh!: THREE.Object3D;
-  private loader!: THREE.TextureLoader;
+  private mesh = new THREE.Object3D();
+  private loader = new THREE.TextureLoader();
   private texture!: THREE.Texture;
 
   componentDidMount() {
-    this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 50);
     this.camera.position.z = 17;
-    this.SPEED = 0.01;
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true, canvas: this.canvas });
     this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -39,10 +37,8 @@ export default class DonutSwirl extends React.Component {
 
     this.scene.add(...lightSources);
 
-    this.mesh = new THREE.Object3D();
     THREE.ImageUtils.crossOrigin = '';
 
-    this.loader = new THREE.TextureLoader();
     this.loader.crossOrigin = '';
     this.texture = this.loader.load(image);
     this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping;
@@ -64,6 +60,7 @@ export default class DonutSwirl extends React.Component {
     this.scene.add(this.mesh);
 
     window.addEventListener('resize', this.resizeHandler, false);
+    this.canvas.addEventListener('mousemove', this.handleMouseMove, false);
 
     this.renderToCanvas();
   }
@@ -78,6 +75,19 @@ export default class DonutSwirl extends React.Component {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+  };
+
+  private lastX = window.innerWidth / 2;
+  private lastY = window.innerHeight / 2;
+  private handleMouseMove = (e: MouseEvent) => {
+    const deltaX = this.lastX - e.x;
+    const deltaY = this.lastY - e.y;
+
+    this.camera.rotation.y += (this.SPEED * deltaX);
+    this.camera.rotation.x += (this.SPEED * deltaY);
+
+    this.lastX = e.x;
+    this.lastY = e.y;
   };
 
   private rotateTorus() {
