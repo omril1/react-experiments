@@ -16,6 +16,7 @@ const ROUTES = [
   'RippleMousePlasma',
   'Combined',
   'CirclesPattern',
+  'RandomPointInCircle',
 ];
 
 (async () => {

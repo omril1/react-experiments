@@ -10,11 +10,12 @@ import * as ShadersImg from './images/Shaders.png';
 import * as RippleMousePlasmaImg from './images/RippleMousePlasma.png';
 import * as CombinedImg from './images/Combined.png';
 import * as CirclesPatternImg from './images/CirclesPattern.png';
+import * as RandomPointInCircleImg from './images/RandomPointInCircle.jpg';
 
 export default function Welcome() {
   return (
     <div className={style.welcome}>
-      <h1>React Eperiments</h1>
+      <h1>React Experiments</h1>
       <h2>(Mostly from CodePen)</h2>
 
       <div className={style.grid}>
@@ -28,6 +29,7 @@ export default function Welcome() {
         <GridItem text="RippleMousePlasma" imgSrc={RippleMousePlasmaImg} />
         <GridItem text="Combined" imgSrc={CombinedImg} />
         <GridItem text="CirclesPattern" imgSrc={CirclesPatternImg} />
+        <GridItem text="RandomPointInCircle" imgSrc={RandomPointInCircleImg} />
       </div>
     </div>
   );

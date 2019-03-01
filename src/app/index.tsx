@@ -19,6 +19,7 @@ const Shaders = Loadable(() => import('app/Routes/Shaders'));
 const RippleMousePlasma = Loadable(() => import('app/Routes/RippleMousePlasma'));
 const Combined = Loadable(() => import('app/Routes/Combined'));
 const CirclesPattern = Loadable(() => import('app/Routes/CirclesPattern'));
+const RandomPointInCircle = Loadable(() => import('app/Routes/RandomPointInCircle'));
 
 // render react DOM
 export const App = hot(module)(({ history }: { history: History }) => (
@@ -35,6 +36,7 @@ export const App = hot(module)(({ history }: { history: History }) => (
       <Route path="/RippleMousePlasma" component={RippleMousePlasma} />
       <Route path="/Combined" component={Combined} />
       <Route path="/CirclesPattern" component={CirclesPattern} />
+      <Route path="/RandomPointInCircle" component={RandomPointInCircle} />
     </Switch>
   </Router>
 ));
