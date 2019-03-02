@@ -4,6 +4,7 @@ import { GUI } from 'dat.gui';
 import { times } from 'lodash';
 
 const MAX_POINTS = 16000;
+const CIRCLE_CENTER = new RandomPoint.Vector2(0.5, 0.5);
 
 declare global {
   interface Window {
@@ -14,6 +15,7 @@ declare global {
 export default class RandomPointInCircle extends React.Component {
   public numOfPoints = 8000;
   public pointState: 0 | 1 | 2 | 3 | 4 = 0;
+  public rotation: number = 0;
 
   public changeState = () => {
     this.pointState == 4 ? (this.pointState = 0) : this.pointState++;
@@ -53,6 +55,11 @@ export default class RandomPointInCircle extends React.Component {
       .add(this, 'numOfPoints', 100, MAX_POINTS)
       .step(100)
       .onChange(this.updateAndRedraw);
+
+    this.gui
+      .add(this, 'rotation', 0, 90)
+      .step(0.2)
+      .onChange(this.renderToCanvas);
     this.gui.add(this, 'changeState');
   }
 
@@ -71,8 +78,11 @@ export default class RandomPointInCircle extends React.Component {
     this.drawCircle(width / 2, height / 2, height / 2);
 
     this.randomPoints.forEach(p => {
-      const x = p.x * height + (width / 2 - height / 2);
-      const y = p.y * height;
+      const rotationInRadians = this.rotation * (Math.PI / 180);
+      // const rotationInRadians = Math.random() * Math.PI * 2;
+      const rotatedPoint = p.getNewRotatedVector(CIRCLE_CENTER, rotationInRadians);
+      const x = rotatedPoint.x * height + (width / 2 - height / 2);
+      const y = rotatedPoint.y * height;
       this.drawCircle(x, y, 1);
     });
   };
