@@ -28,8 +28,25 @@ namespace RandomPoint {
     return new Vector2(x, y);
   };
 
-  export const getRandomPointAllOfTheAbove = () => {
-    return [getRandomPoint, getRandomPointUniform, getRandomPointDror][random(0, 2, false)]();
+  export const getRandomPointInChord = () => {
+    const angle1 = Math.random() * 2 * Math.PI;
+    const angle2 = Math.random() * 2 * Math.PI;
+    const p1 = new Vector2(Math.cos(angle1) / 2 + 0.5, Math.sin(angle1) / 2 + 0.5);
+    const p2 = new Vector2(Math.cos(angle2) / 2 + 0.5, Math.sin(angle2) / 2 + 0.5);
+    return new Vector2((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+  };
+
+  export const getMidpointOfRandomChords = () => {
+    const chordLength = Math.random() * 2; // from 0 to 2
+    // 2 = PI rad, 1 = 0.5PI rad
+    const twoThirdsPI = (2 / 3) * Math.PI;
+
+    // from 0 to PI radians (180 degrees) with 50% chance to be negative
+    const angle1 = Math.random() * 2 * Math.PI;
+    const angle2 = angle1 + random(twoThirdsPI, twoThirdsPI * 2, true) * Math.random();
+    const p1 = new Vector2(Math.cos(angle1) / 2 + 0.5, Math.sin(angle1) / 2 + 0.5);
+    const p2 = new Vector2(Math.cos(angle2) / 2 + 0.5, Math.sin(angle2) / 2 + 0.5);
+    return new Vector2((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
   };
 
   /**
@@ -46,6 +63,24 @@ namespace RandomPoint {
       }
     }
   };
+
+  export const all: ReadonlyArray<() => Vector2> = [
+    getRandomPoint,
+    getRandomPointUniform,
+    getRandomPointDror,
+    getRandomPointInChord,
+    getMidpointOfRandomChords,
+    getRandomPointWhile,
+  ];
+
+  export const names: ReadonlyArray<string> = [
+    'getRandomPoint \n(Random angle scaled uniformly between 0 and 1)',
+    'getRandomPointUniform \n(same as above, but scaled as Math.sqrt(Math.random()))',
+    "getRandomPointDror (Dror's solution)",
+    'getRandomPointInChord',
+    'getMidpointOfRandomChords',
+    'getRandomPointWhile (keep generating points in square until they fit)',
+  ];
 
   export class Vector2 {
     constructor(public x: number, public y: number) {}

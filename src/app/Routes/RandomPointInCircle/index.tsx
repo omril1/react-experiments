@@ -2,6 +2,8 @@ import * as React from 'react';
 import RandomPoint from './RandomPoint';
 import { GUI } from 'dat.gui';
 import { times } from 'lodash';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 
 const MAX_POINTS = 16000;
 const CIRCLE_CENTER = new RandomPoint.Vector2(0.5, 0.5);
@@ -12,14 +14,28 @@ declare global {
   }
 }
 
+@observer
 export default class RandomPointInCircle extends React.Component {
   public numOfPoints = 8000;
-  public pointState: 0 | 1 | 2 | 3 | 4 = 0;
+  @observable
+  public pointState: number = 0;
   public rotation: number = 0;
 
-  public changeState = () => {
-    this.pointState == 4 ? (this.pointState = 0) : this.pointState++;
+  public getNextState = () => {
+    this.pointState == RandomPoint.all.length - 1 ? (this.pointState = 0) : this.pointState++;
     this.updateAndRedraw();
+  };
+  public getPrevState = () => {
+    this.pointState == 0 ? (this.pointState = RandomPoint.all.length - 1) : this.pointState--;
+    this.updateAndRedraw();
+  };
+  public increaseRotation = () => {
+    if (this.rotation < 90) this.rotation += 0.2;
+    this.renderToCanvas();
+  };
+  public decreaseRotation = () => {
+    if (this.rotation > 0) this.rotation -= 0.2;
+    this.renderToCanvas();
   };
 
   private canvas!: HTMLCanvasElement;
@@ -30,20 +46,19 @@ export default class RandomPointInCircle extends React.Component {
     this.ctx = canvas.getContext('2d')!;
   };
   private getRandomPoint = () => {
-    return [
-      RandomPoint.getRandomPoint,
-      RandomPoint.getRandomPointUniform,
-      RandomPoint.getRandomPointDror,
-      RandomPoint.getRandomPointAllOfTheAbove,
-      RandomPoint.getRandomPointWhile,
-    ][this.pointState]();
+    return RandomPoint.all[this.pointState]();
   };
   private randomPoints = (window.randomPoints = times(this.numOfPoints).map(this.getRandomPoint));
 
   componentDidMount() {
     this.initControls();
     window.addEventListener('resize', this.renderToCanvas);
+    document.addEventListener('keydown', this.onKeyDown, true);
     this.renderToCanvas();
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyDown, true);
   }
 
   private clearCanvas() {
@@ -60,8 +75,26 @@ export default class RandomPointInCircle extends React.Component {
       .add(this, 'rotation', 0, 90)
       .step(0.2)
       .onChange(this.renderToCanvas);
-    this.gui.add(this, 'changeState');
+    this.gui.add(this, 'getNextState');
   }
+
+  public onKeyDown = (event: KeyboardEvent) => {
+    event = event || window.event;
+
+    if (event.keyCode == 38) {
+      // up arrow
+      this.increaseRotation();
+    } else if (event.keyCode == 40) {
+      // down arrow
+      this.decreaseRotation();
+    } else if (event.keyCode == 37) {
+      // left arrow
+      this.getNextState();
+    } else if (event.keyCode == 39) {
+      // right arrow
+      this.getPrevState();
+    }
+  };
 
   private updateAndRedraw = () => {
     this.randomPoints = window.randomPoints = times(this.numOfPoints).map(this.getRandomPoint);
@@ -79,7 +112,6 @@ export default class RandomPointInCircle extends React.Component {
 
     this.randomPoints.forEach(p => {
       const rotationInRadians = this.rotation * (Math.PI / 180);
-      // const rotationInRadians = Math.random() * Math.PI * 2;
       const rotatedPoint = p.getNewRotatedVector(CIRCLE_CENTER, rotationInRadians);
       const x = rotatedPoint.x * height + (width / 2 - height / 2);
       const y = rotatedPoint.y * height;
@@ -103,6 +135,19 @@ export default class RandomPointInCircle extends React.Component {
   }
 
   render() {
-    return <canvas ref={this.setCanvasRef} onClick={this.changeState} />;
+    return (
+      <>
+        <div style={{ position: 'absolute', left: '10vw', top: '10vw' }}>
+          <span>state: {this.pointState}</span>
+          <br />
+          <pre>{RandomPoint.names[this.pointState]}</pre>
+        </div>
+        <canvas ref={this.setCanvasRef} onClick={this.getNextState} />
+      </>
+    );
   }
+}
+
+if (module.hot) {
+  module.hot.decline();
 }
