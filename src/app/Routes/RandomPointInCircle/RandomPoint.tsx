@@ -3,15 +3,17 @@ import { random } from 'lodash';
 namespace RandomPoint {
   export const negativeOrPositive = () => (Math.random() > 0.5 ? -1 : 1);
 
+  export const getRandomAngle = () => Math.random() * 2 * Math.PI;
+
   export const getRandomPoint = () => {
-    const angle = Math.random() * 2 * Math.PI;
+    const angle = getRandomAngle();
     const x = (Math.cos(angle) * Math.random()) / 2 + 0.5;
     const y = (Math.sin(angle) * Math.random()) / 2 + 0.5;
     return new Vector2(x, y);
   };
 
   export const getRandomPointUniform = () => {
-    const angle = Math.random() * 2 * Math.PI;
+    const angle = getRandomAngle();
     const x = (Math.cos(angle) * Math.sqrt(Math.random())) / 2 + 0.5;
     const y = (Math.sin(angle) * Math.sqrt(Math.random())) / 2 + 0.5;
     return new Vector2(x, y);
@@ -29,8 +31,8 @@ namespace RandomPoint {
   };
 
   export const getRandomPointInChord = () => {
-    const angle1 = Math.random() * 2 * Math.PI;
-    const angle2 = Math.random() * 2 * Math.PI;
+    const angle1 = getRandomAngle();
+    const angle2 = getRandomAngle();
     const p1 = new Vector2(Math.cos(angle1) / 2 + 0.5, Math.sin(angle1) / 2 + 0.5);
     const p2 = new Vector2(Math.cos(angle2) / 2 + 0.5, Math.sin(angle2) / 2 + 0.5);
     return new Vector2((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
@@ -42,7 +44,7 @@ namespace RandomPoint {
     const twoThirdsPI = (2 / 3) * Math.PI;
 
     // from 0 to PI radians (180 degrees) with 50% chance to be negative
-    const angle1 = Math.random() * 2 * Math.PI;
+    const angle1 = getRandomAngle();
     const angle2 = angle1 + random(twoThirdsPI, twoThirdsPI * 2, true) * Math.random();
     const p1 = new Vector2(Math.cos(angle1) / 2 + 0.5, Math.sin(angle1) / 2 + 0.5);
     const p2 = new Vector2(Math.cos(angle2) / 2 + 0.5, Math.sin(angle2) / 2 + 0.5);
@@ -64,22 +66,14 @@ namespace RandomPoint {
     }
   };
 
-  export const all: ReadonlyArray<() => Vector2> = [
-    getRandomPoint,
-    getRandomPointUniform,
-    getRandomPointDror,
-    getRandomPointInChord,
-    getMidpointOfRandomChords,
-    getRandomPointWhile,
-  ];
-
-  export const names: ReadonlyArray<string> = [
-    'getRandomPoint \n(Random angle scaled uniformly between 0 and 1)',
-    'getRandomPointUniform \n(same as above, but scaled as Math.sqrt(Math.random()))',
-    "getRandomPointDror (Dror's solution)",
-    'getRandomPointInChord',
-    'getMidpointOfRandomChords',
-    'getRandomPointWhile (keep generating points in square until they fit)',
+  // prettier-ignore
+  export const all: ReadonlyArray<{method: () => Vector2, description: string}> = [
+    { method: getRandomPoint           , description: 'getRandomPoint \n(Random angle scaled uniformly between 0 and 1)'               ,},
+    { method: getRandomPointUniform    , description: 'getRandomPointUniform \n(same as above, but scaled as Math.sqrt(Math.random()))',},
+    { method: getRandomPointDror       , description: "getRandomPointDror \n(Dror's solution)"                                         ,},
+    { method: getRandomPointInChord    , description: 'getRandomPointInChord'                                                          ,},
+    { method: getMidpointOfRandomChords, description: 'getMidpointOfRandomChords'                                                      ,},
+    { method: getRandomPointWhile      , description: 'getRandomPointWhile \n(keep generating points in square until they fit)'        ,},
   ];
 
   export class Vector2 {

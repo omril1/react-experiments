@@ -46,7 +46,7 @@ export default class RandomPointInCircle extends React.Component {
     this.ctx = canvas.getContext('2d')!;
   };
   private getRandomPoint = () => {
-    return RandomPoint.all[this.pointState]();
+    return RandomPoint.all[this.pointState].method();
   };
   private randomPoints = (window.randomPoints = times(this.numOfPoints).map(this.getRandomPoint));
 
@@ -137,10 +137,10 @@ export default class RandomPointInCircle extends React.Component {
   render() {
     return (
       <>
-        <div style={{ position: 'absolute', left: '10vw', top: '10vw' }}>
+        <div style={{ position: 'absolute', left: '5vw', top: '5vw' }}>
           <span>state: {this.pointState}</span>
           <br />
-          <pre>{RandomPoint.names[this.pointState]}</pre>
+          <pre>{RandomPoint.all[this.pointState].description}</pre>
         </div>
         <canvas ref={this.setCanvasRef} onClick={this.getNextState} />
       </>
