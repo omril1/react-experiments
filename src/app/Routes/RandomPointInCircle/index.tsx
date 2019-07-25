@@ -5,7 +5,7 @@ import { times } from 'lodash';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-const MAX_POINTS = 16000;
+const MAX_POINTS = 32000;
 const CIRCLE_CENTER = new RandomPoint.Vector2(0.5, 0.5);
 
 declare global {
@@ -16,7 +16,7 @@ declare global {
 
 @observer
 export default class RandomPointInCircle extends React.Component {
-  public numOfPoints = 8000;
+  public numOfPoints = 16000;
   @observable
   public pointState: number = 0;
   public rotation: number = 0;
@@ -45,9 +45,7 @@ export default class RandomPointInCircle extends React.Component {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d')!;
   };
-  private getRandomPoint = () => {
-    return RandomPoint.all[this.pointState].method();
-  };
+  private getRandomPoint = () => RandomPoint.all[this.pointState].method();
   private randomPoints = (window.randomPoints = times(this.numOfPoints).map(this.getRandomPoint));
 
   componentDidMount() {
@@ -61,13 +59,11 @@ export default class RandomPointInCircle extends React.Component {
     document.removeEventListener('keydown', this.onKeyDown, true);
   }
 
-  private clearCanvas() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  }
+  private clearCanvas = () => this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
   public initControls() {
     this.gui
-      .add(this, 'numOfPoints', 100, MAX_POINTS)
+      .add(this, 'numOfPoints', MAX_POINTS / 100, MAX_POINTS)
       .step(100)
       .onChange(this.updateAndRedraw);
 

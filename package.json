@@ -5,7 +5,7 @@
   "description": "A frontend boilerplate with React, MobX and Typescript",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --hot --progress --colors --port 3000 --open",
+    "start": "webpack-dev-server --mode development --hot --progress --colors --port 3002 --open",
     "build": "webpack -p --progress --colors",
     "takeScreenshots": "node ./scripts/takeScreenshots.js",
     "test": "jest --verbose",
