@@ -72,17 +72,13 @@ export default class RandomPointInCircle extends React.Component {
   }
 
   private onKeyDown = (event: KeyboardEvent) => {
-    if (event.keyCode == 38) {
-      // up arrow
+    if (event.code == 'ArrowUp') {
       this.increaseRotation();
-    } else if (event.keyCode == 40) {
-      // down arrow
+    } else if (event.code == 'ArrowDown') {
       this.decreaseRotation();
-    } else if (event.keyCode == 37) {
-      // left arrow
+    } else if (event.code == 'ArrowRight') {
       this.getNextState();
-    } else if (event.keyCode == 39) {
-      // right arrow
+    } else if (event.code == 'ArrowLeft') {
       this.getPrevState();
     }
   };
@@ -106,7 +102,7 @@ export default class RandomPointInCircle extends React.Component {
       const rotatedPoint = p.getNewRotatedVector(CIRCLE_CENTER, rotationInRadians);
       const x = (rotatedPoint.x / 2 + 0.5) * height + (width / 2 - height / 2);
       const y = (rotatedPoint.y / 2 + 0.5) * height;
-      this.canvasContextWrapper.drawCircle(x, y, 1);
+      this.canvasContextWrapper.drawSquare(x, y, 1);
     });
   };
 
