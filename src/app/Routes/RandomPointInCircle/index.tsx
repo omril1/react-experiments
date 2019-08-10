@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 import { times } from 'lodash';
 
 const MAX_POINTS = 32000;
-const CIRCLE_CENTER = new RandomPoint.Vector2(0.5, 0.5);
+const CIRCLE_CENTER = new RandomPoint.Vector2(0, 0);
 
 declare global {
   interface Window {
@@ -72,8 +72,6 @@ export default class RandomPointInCircle extends React.Component {
   }
 
   private onKeyDown = (event: KeyboardEvent) => {
-    event = event || window.event;
-
     if (event.keyCode == 38) {
       // up arrow
       this.increaseRotation();
@@ -106,8 +104,8 @@ export default class RandomPointInCircle extends React.Component {
     this.randomPoints.forEach(p => {
       const rotationInRadians = this.rotation * (Math.PI / 180);
       const rotatedPoint = p.getNewRotatedVector(CIRCLE_CENTER, rotationInRadians);
-      const x = rotatedPoint.x * height + (width / 2 - height / 2);
-      const y = rotatedPoint.y * height;
+      const x = (rotatedPoint.x / 2 + 0.5) * height + (width / 2 - height / 2);
+      const y = (rotatedPoint.y / 2 + 0.5) * height;
       this.canvasContextWrapper.drawCircle(x, y, 1);
     });
   };
