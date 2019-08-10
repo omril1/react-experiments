@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import { times } from 'lodash';
 
 const MAX_POINTS = 32000;
+const ROTATION_STEP = 0.6;
 const CIRCLE_CENTER = new RandomPoint.Vector2(0, 0);
 
 declare global {
@@ -32,12 +33,16 @@ export default class RandomPointInCircle extends React.Component {
     this.pointState == 0 ? (this.pointState = RandomPoint.all.length - 1) : this.pointState--;
     this.updateAndRedraw();
   };
-  private increaseRotation = () => {
-    if (this.rotation < 90) this.rotation += 0.2;
+  private increaseRotation = (rotationStep: number) => {
+    this.rotation += rotationStep;
+    this.rotation %= 360;
+    this.gui.updateDisplay();
     this.renderToCanvas();
   };
-  private decreaseRotation = () => {
-    if (this.rotation > 0) this.rotation -= 0.2;
+  private decreaseRotation = (rotationStep: number) => {
+    this.rotation -= rotationStep;
+    this.rotation %= 360;
+    this.gui.updateDisplay();
     this.renderToCanvas();
   };
 
@@ -73,9 +78,9 @@ export default class RandomPointInCircle extends React.Component {
 
   private onKeyDown = (event: KeyboardEvent) => {
     if (event.code == 'ArrowUp') {
-      this.increaseRotation();
+      this.increaseRotation(event.shiftKey ? ROTATION_STEP * 10 : ROTATION_STEP);
     } else if (event.code == 'ArrowDown') {
-      this.decreaseRotation();
+      this.decreaseRotation(event.shiftKey ? ROTATION_STEP * 10 : ROTATION_STEP);
     } else if (event.code == 'ArrowRight') {
       this.getNextState();
     } else if (event.code == 'ArrowLeft') {
