@@ -79,6 +79,8 @@ namespace RandomPoint {
   export class Vector2 {
     constructor(public x: number, public y: number) {}
 
+    private toString = () => `${this.x},${this.y}`;
+
     public getNewRotatedVector(center: Vector2, angle: number) {
       const c = Math.cos(angle);
       const s = Math.sin(angle);
