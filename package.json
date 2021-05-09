@@ -82,7 +82,7 @@
     "core-js": "^2.6.5",
     "dat.gui": "^0.7.5",
     "history": "^4.7.2",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mobx": "4.5",
     "mobx-react": "^5.4.2",
     "mobx-react-router": "^4.0.5",
